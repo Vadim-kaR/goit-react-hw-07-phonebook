@@ -13,15 +13,15 @@ const ContactsList = () => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
 
-  const contacts = [];
-  const filter = '';
+  // const contacts = [];
+  // const filter = '';
 
-  const getFiltredContact = () => {
-    const lowerCasedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(lowerCasedFilter)
-    );
-  };
+  // const getFiltredContact = () => {
+  //   const lowerCasedFilter = filter.toLowerCase();
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(lowerCasedFilter)
+  //   );
+  // };
 
   const deleteContact = id => {
     // dispatch(removeContact(id));
