@@ -1,13 +1,20 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Box } from 'components/Box/Box';
-import { ContactItem, ContactText } from './ContactsList.styled';
+import { ContactItem, ContactText, List } from './ContactsList.styled';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeContact, getContacts, getFilterName } from 'redux/slice';
+import { contactsSelectors, contactsOperations } from 'redux/contacts';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilterName);
-  const contacts = useSelector(getContacts);
+  const { data } = useSelector(contactsSelectors.getContacts);
+
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
+
+  const contacts = [];
+  const filter = '';
 
   const getFiltredContact = () => {
     const lowerCasedFilter = filter.toLowerCase();
@@ -16,36 +23,34 @@ const ContactsList = () => {
     );
   };
 
-  const data = getFiltredContact();
-
   const deleteContact = id => {
-    dispatch(removeContact(id));
+    // dispatch(removeContact(id));
   };
 
   return (
-    <Box pt="l" pb="l">
-      <ul>
-        {data.map(({ id, name, number }) => (
+    <Box pt="l" pb="l" width="100%">
+      <List>
+        {data?.map(({ id, name, phone }) => (
           <ContactItem key={id}>
             <ContactText>
-              {name}: {number}
+              {name}: {phone}
             </ContactText>
             <button onClick={() => deleteContact(id)}>Delete</button>
           </ContactItem>
         ))}
-      </ul>
+      </List>
     </Box>
   );
 };
 
-ContactsList.prototype = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-    })
-  ),
-};
+// ContactsList.prototype = {
+//   data: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.number.isRequired,
+//     })
+//   ),
+// };
 
 export { ContactsList };

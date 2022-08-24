@@ -9,7 +9,7 @@ function App() {
     <Box pt="l" display="flex" justifyContent="center">
       <Box
         width="400px"
-        height="400px"
+        minHeight="400px"
         p="l"
         bg="accent"
         flexDirection="column"

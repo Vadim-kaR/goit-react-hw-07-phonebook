@@ -3,13 +3,13 @@ import { Form, Field, Formik, ErrorMessage } from 'formik';
 import { Box } from 'components/Box/Box';
 import { InputTitle, InputField, AddBtn } from './ContactForm.styled';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { addContact, getContacts } from 'redux/slice';
+// import { addContact, getContacts } from 'redux/slice';
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  // const dispatch = useDispatch();
+  // const contacts = useSelector(getContacts);
 
   let schema = yup.object().shape({
     name: yup
@@ -36,16 +36,16 @@ const ContactForm = () => {
     };
     console.log(newContact);
 
-    const alreadyName = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
+    // const alreadyName = contacts.find(
+    //   contact => contact.name.toLowerCase() === name.toLowerCase()
+    // );
 
-    if (alreadyName) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
+    // if (alreadyName) {
+    //   alert(`${name} is already in contacts.`);
+    //   return;
+    // }
 
-    dispatch(addContact(newContact));
+    // dispatch(addContact(newContact));
   };
 
   return (
