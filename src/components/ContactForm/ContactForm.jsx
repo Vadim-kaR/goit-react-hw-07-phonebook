@@ -3,13 +3,13 @@ import { Form, Field, Formik, ErrorMessage } from 'formik';
 import { Box } from 'components/Box/Box';
 import { InputTitle, InputField, AddBtn } from './ContactForm.styled';
 import * as yup from 'yup';
-// import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
-// import { addContact, getContacts } from 'redux/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contacts/contactsOperations';
+import { contactsSelectors } from 'redux/contacts';
 
 const ContactForm = () => {
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const contacts = useSelector(contactsSelectors.getContacts);
 
   let schema = yup.object().shape({
     name: yup
@@ -19,7 +19,7 @@ const ContactForm = () => {
         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
         'name may contain only letters'
       ),
-    number: yup
+    phone: yup
       .string()
       .required()
       .matches(
@@ -28,24 +28,21 @@ const ContactForm = () => {
       ),
   });
 
-  const handelContactSubmit = ({ name, number }) => {
+  const handelContactSubmit = ({ name, phone }) => {
     const newContact = {
-      id: nanoid(),
-      name: name,
-      number: number,
+      name,
+      phone,
     };
-    console.log(newContact);
 
-    // const alreadyName = contacts.find(
-    //   contact => contact.name.toLowerCase() === name.toLowerCase()
-    // );
+    const alreadyName = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
 
-    // if (alreadyName) {
-    //   alert(`${name} is already in contacts.`);
-    //   return;
-    // }
-
-    // dispatch(addContact(newContact));
+    if (alreadyName) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+    dispatch(addContact(newContact));
   };
 
   return (
@@ -53,7 +50,7 @@ const ContactForm = () => {
       <Formik
         initialValues={{
           name: '',
-          number: '',
+          phone: '',
         }}
         validationSchema={schema}
         onSubmit={handelContactSubmit}
@@ -70,10 +67,10 @@ const ContactForm = () => {
               <Field type="text" name="name" />
               <ErrorMessage component="div" name="name" />
             </InputField>
-            <InputField htmlFor="number">
+            <InputField htmlFor="phone">
               <InputTitle>Phone</InputTitle>
-              <Field type="tel" name="number" />
-              <ErrorMessage component="div" name="number" />
+              <Field type="tel" name="phone" />
+              <ErrorMessage component="div" name="phone" />
             </InputField>
             <AddBtn type="submit">Add Contact</AddBtn>
           </Box>

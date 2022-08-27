@@ -1,19 +1,20 @@
 import { InputTitle } from './Filter.styled';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { filterByContactName, getFilterName } from 'redux/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterByContactName } from 'redux/contacts/contactsSlice';
+import { getFilterName } from 'redux/contacts/contactsSelectors';
 
 const Filter = () => {
-  // const dispatch = useDispatch();
-  // const filter = useSelector(getFilterName);
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilterName);
 
   const setFilterName = e => {
-    // dispatch(filterByContactName(e.currentTarget.value));
+    dispatch(filterByContactName(e.currentTarget.value));
   };
 
   return (
     <label>
       <InputTitle>Filter</InputTitle>
-      <input type="text" onChange={setFilterName} />
+      <input type="text" value={filter} onChange={setFilterName} />
     </label>
   );
 };

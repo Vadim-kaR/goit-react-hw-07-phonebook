@@ -4,27 +4,28 @@ import { ContactItem, ContactText, List } from './ContactsList.styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsSelectors, contactsOperations } from 'redux/contacts';
+import { getFilterName } from 'redux/contacts/contactsSelectors';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector(contactsSelectors.getContacts);
+  const contacts = useSelector(contactsSelectors.getContacts);
+  const filter = useSelector(getFilterName);
 
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
 
-  // const contacts = [];
-  // const filter = '';
+  const getFiltredContact = () => {
+    const lowerCasedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(lowerCasedFilter)
+    );
+  };
 
-  // const getFiltredContact = () => {
-  //   const lowerCasedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(lowerCasedFilter)
-  //   );
-  // };
+  const data = getFiltredContact();
 
   const deleteContact = id => {
-    // dispatch(removeContact(id));
+    dispatch(contactsOperations.removeContact(id));
   };
 
   return (
