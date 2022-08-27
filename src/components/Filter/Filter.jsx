@@ -1,4 +1,4 @@
-import { InputTitle } from './Filter.styled';
+import { InputTitle, Inpute } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByContactName } from 'redux/contacts/contactsSlice';
 import { getFilterName } from 'redux/contacts/contactsSelectors';
@@ -14,7 +14,7 @@ const Filter = () => {
   return (
     <label>
       <InputTitle>Filter</InputTitle>
-      <input type="text" value={filter} onChange={setFilterName} />
+      <Inpute type="text" value={filter} onChange={setFilterName} />
     </label>
   );
 };

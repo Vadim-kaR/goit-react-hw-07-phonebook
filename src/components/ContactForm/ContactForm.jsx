@@ -1,12 +1,13 @@
 // import PropTypes from 'prop-types';
-import { Form, Field, Formik, ErrorMessage } from 'formik';
+import { Form, Formik, ErrorMessage } from 'formik';
 import { Box } from 'components/Box/Box';
-import { InputTitle, InputField, AddBtn } from './ContactForm.styled';
+import { InputTitle, InputField, AddBtn, Inpute } from './ContactForm.styled';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contactsOperations';
 import { contactsSelectors } from 'redux/contacts';
 
+import { TiPlus } from 'react-icons/ti';
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(contactsSelectors.getContacts);
@@ -64,15 +65,18 @@ const ContactForm = () => {
           >
             <InputField htmlFor="name">
               <InputTitle>Name</InputTitle>
-              <Field type="text" name="name" />
+              <Inpute type="text" name="name" />
               <ErrorMessage component="div" name="name" />
             </InputField>
             <InputField htmlFor="phone">
               <InputTitle>Phone</InputTitle>
-              <Field type="tel" name="phone" />
+              <Inpute type="tel" name="phone" />
               <ErrorMessage component="div" name="phone" />
             </InputField>
-            <AddBtn type="submit">Add Contact</AddBtn>
+            <AddBtn type="submit">
+              <TiPlus size={12} />
+              Add Contact
+            </AddBtn>
           </Box>
         </Form>
       </Formik>

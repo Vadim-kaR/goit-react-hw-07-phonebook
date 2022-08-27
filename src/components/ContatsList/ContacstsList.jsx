@@ -1,6 +1,11 @@
-// import PropTypes from 'prop-types';
 import { Box } from 'components/Box/Box';
-import { ContactItem, ContactText, List } from './ContactsList.styled';
+import {
+  ContactItem,
+  Text,
+  NameText,
+  NumberText,
+  DeleteBtn,
+} from './ContactsList.styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsSelectors, contactsOperations } from 'redux/contacts';
@@ -30,28 +35,19 @@ const ContactsList = () => {
 
   return (
     <Box pt="l" pb="l" width="100%">
-      <List>
+      <ul>
         {data?.map(({ id, name, phone }) => (
           <ContactItem key={id}>
-            <ContactText>
-              {name}: {phone}
-            </ContactText>
-            <button onClick={() => deleteContact(id)}>Delete</button>
+            <Text>
+              <NameText>{name}:</NameText>
+              <NumberText>{phone}</NumberText>
+            </Text>
+            <DeleteBtn onClick={() => deleteContact(id)}>Delete</DeleteBtn>
           </ContactItem>
         ))}
-      </List>
+      </ul>
     </Box>
   );
 };
-
-// ContactsList.prototype = {
-//   data: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.number.isRequired,
-//     })
-//   ),
-// };
 
 export { ContactsList };

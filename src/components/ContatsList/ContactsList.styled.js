@@ -6,10 +6,22 @@ export const ContactItem = styled.li`
   justify-content: center;
 `;
 
-export const ContactText = styled.p`
-  width: 200px;
+export const Text = styled.div`
+  width: 100%;
+  display: flex;
+  font-weight: 500;
 `;
 
-export const List = styled.ul`
-  /* width: 100%; */
+export const NameText = styled.p`
+  width: 50%;
+`;
+
+export const NumberText = styled.p`
+  width: 50%;
+`;
+
+export const DeleteBtn = styled.button`
+  padding: 3px 5px;
+  border-radius: 5px;
+  border: none;
 `;

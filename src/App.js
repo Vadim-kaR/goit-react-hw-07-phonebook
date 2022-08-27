@@ -16,6 +16,7 @@ function App() {
         display="flex"
         alignItems="center"
         overflow="hidden"
+        borderRadius="min"
       >
         <h1>PhoneBook</h1>
         <ContactForm />
