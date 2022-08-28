@@ -1,7 +1,13 @@
 // import PropTypes from 'prop-types';
-import { Form, Formik, ErrorMessage } from 'formik';
+import { Form, Formik } from 'formik';
 import { Box } from 'components/Box/Box';
-import { InputTitle, InputField, AddBtn, Inpute } from './ContactForm.styled';
+import {
+  InputTitle,
+  InputField,
+  AddBtn,
+  Inpute,
+  Error,
+} from './ContactForm.styled';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contactsOperations';
@@ -64,14 +70,20 @@ const ContactForm = () => {
             p="l"
           >
             <InputField htmlFor="name">
-              <InputTitle>Name</InputTitle>
-              <Inpute type="text" name="name" />
-              <ErrorMessage component="div" name="name" />
+              <Box display="flex">
+                <InputTitle>Name</InputTitle>
+                <Inpute type="text" name="name" />
+              </Box>
+
+              <Error component="div" name="name" />
             </InputField>
             <InputField htmlFor="phone">
-              <InputTitle>Phone</InputTitle>
-              <Inpute type="tel" name="phone" />
-              <ErrorMessage component="div" name="phone" />
+              <Box display="flex">
+                <InputTitle>Phone</InputTitle>
+                <Inpute type="tel" name="phone" />
+              </Box>
+
+              <Error component="div" name="phone" />
             </InputField>
             <AddBtn type="submit">
               <TiPlus size={12} />

@@ -24,4 +24,10 @@ export const DeleteBtn = styled.button`
   padding: 3px 5px;
   border-radius: 5px;
   border: none;
+  background-color: #0396aa;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #027583;
+  }
 `;

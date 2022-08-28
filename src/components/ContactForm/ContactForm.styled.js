@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 
 export const InputTitle = styled.span`
   margin-right: 10px;
@@ -8,7 +8,7 @@ export const InputTitle = styled.span`
 
 export const InputField = styled.label`
   margin-bottom: 20px;
-  display: flex;
+  /* display: flex; */
 `;
 
 export const AddBtn = styled.button`
@@ -28,4 +28,10 @@ export const Inpute = styled(Field)`
   outline: none;
   padding: 3px 10px;
   width: 180px;
+`;
+
+export const Error = styled(ErrorMessage)`
+  padding: 5px 0 5px 0;
+  color: #a62217;
+  font-weight: 500;
 `;
