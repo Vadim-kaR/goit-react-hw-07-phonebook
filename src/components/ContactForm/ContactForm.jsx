@@ -1,5 +1,6 @@
 // import PropTypes from 'prop-types';
 import { Form, Formik } from 'formik';
+import { toast } from 'react-toastify';
 import { Box } from 'components/Box/Box';
 import {
   InputTitle,
@@ -35,7 +36,7 @@ const ContactForm = () => {
       ),
   });
 
-  const handelContactSubmit = ({ name, phone }) => {
+  const handleContactSubmit = ({ name, phone }, { resetForm }) => {
     const newContact = {
       name,
       phone,
@@ -46,53 +47,52 @@ const ContactForm = () => {
     );
 
     if (alreadyName) {
-      alert(`${name} is already in contacts.`);
+      toast.info(`${name} is already in contacts.`);
       return;
     }
     dispatch(addContact(newContact));
+    resetForm();
   };
 
   return (
-    <>
-      <Formik
-        initialValues={{
-          name: '',
-          phone: '',
-        }}
-        validationSchema={schema}
-        onSubmit={handelContactSubmit}
-      >
-        <Form autoComplete="off">
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            p="l"
-          >
-            <InputField htmlFor="name">
-              <Box display="flex">
-                <InputTitle>Name</InputTitle>
-                <Inpute type="text" name="name" />
-              </Box>
+    <Formik
+      initialValues={{
+        name: '',
+        phone: '',
+      }}
+      validationSchema={schema}
+      onSubmit={handleContactSubmit}
+    >
+      <Form autoComplete="off">
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          p="l"
+        >
+          <InputField htmlFor="name">
+            <Box display="flex">
+              <InputTitle>Name</InputTitle>
+              <Inpute type="text" name="name" />
+            </Box>
 
-              <Error component="div" name="name" />
-            </InputField>
-            <InputField htmlFor="phone">
-              <Box display="flex">
-                <InputTitle>Phone</InputTitle>
-                <Inpute type="tel" name="phone" />
-              </Box>
+            <Error component="div" name="name" />
+          </InputField>
+          <InputField htmlFor="phone">
+            <Box display="flex">
+              <InputTitle>Phone</InputTitle>
+              <Inpute type="tel" name="phone" />
+            </Box>
 
-              <Error component="div" name="phone" />
-            </InputField>
-            <AddBtn type="submit">
-              <TiPlus size={12} />
-              Add Contact
-            </AddBtn>
-          </Box>
-        </Form>
-      </Formik>
-    </>
+            <Error component="div" name="phone" />
+          </InputField>
+          <AddBtn type="submit">
+            <TiPlus size={12} />
+            Add Contact
+          </AddBtn>
+        </Box>
+      </Form>
+    </Formik>
   );
 };
 

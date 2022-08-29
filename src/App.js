@@ -3,6 +3,8 @@ import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactsTitle } from 'components/ContactsTitle/ContactsTitle';
 import { Box } from 'components/Box/Box';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <ContactsTitle />
         <Filter />
         <ContactsList />
+        <ToastContainer autoClose={2000} />
       </Box>
     </Box>
   );

@@ -8,7 +8,7 @@ const initialState = {
   filter: '',
 };
 
-export const contacts = createSlice({
+const contacts = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
@@ -33,7 +33,7 @@ export const contacts = createSlice({
     },
     [removeContact.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.entities = state.entities.filter(({ id }) => id !== payload);
+      state.entities = payload;
     },
     [removeContact.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -54,3 +54,5 @@ export const contacts = createSlice({
 });
 
 export const { filterByContactName } = contacts.actions;
+
+export default contacts.reducer;

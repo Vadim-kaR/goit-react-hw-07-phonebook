@@ -27,8 +27,6 @@ const ContactsList = () => {
     );
   };
 
-  const data = getFiltredContact();
-
   const deleteContact = id => {
     dispatch(contactsOperations.removeContact(id));
   };
@@ -36,7 +34,7 @@ const ContactsList = () => {
   return (
     <Box pt="l" pb="l" width="100%">
       <ul>
-        {data?.map(({ id, name, phone }) => (
+        {getFiltredContact().map(({ id, name, phone }) => (
           <ContactItem key={id}>
             <Text>
               <NameText>{name}:</NameText>
